@@ -41,9 +41,9 @@ export default function LoginPage() {
   useEffect(() => {
     let mounted = true
     async function init() {
-      const { createClientSupabase } = await import('../../lib/supabaseClient')
+      const { supabase } = await import('../../lib/supabaseClient')
       if (!mounted) return
-      supabaseRef.current = createClientSupabase()
+      supabaseRef.current = supabase
       // listen for changes and redirect on login
       const { data: sub } = supabaseRef.current.auth.onAuthStateChange((_event: any, session: any) => {
         console.debug('[auth] onAuthStateChange event', _event, { hasSession: !!session, userId: session?.user?.id })

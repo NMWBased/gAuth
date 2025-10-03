@@ -11,9 +11,9 @@ export default function ProfileForm({ user }: { user: any }) {
   useEffect(() => {
     let mounted = true
     async function init() {
-      const { createClientSupabase } = await import('../lib/supabaseClient')
+      const { supabase } = await import('../lib/supabaseClient')
       if (!mounted) return
-      supabaseRef.current = createClientSupabase()
+      supabaseRef.current = supabase
     }
     init()
     return () => { mounted = false }

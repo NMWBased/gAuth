@@ -15,8 +15,8 @@ export default function Header() {
     let mounted = true
     let unsubscribe: (() => void) | null = null
     async function init() {
-      const { createClientSupabase } = await import('../lib/supabaseClient')
-      supabaseRef.current = createClientSupabase()
+      const { supabase } = await import('../lib/supabaseClient')
+      supabaseRef.current = supabase
       const { data } = await supabaseRef.current.auth.getUser()
       if (!mounted) return
   setUserEmail(data?.user?.email ?? null)
