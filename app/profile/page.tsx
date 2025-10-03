@@ -1,18 +1,50 @@
-export const dynamic = 'force-dynamic'
+"use client"
 
-import { cookies } from 'next/headers'
-import { supabase } from '../../lib/supabaseClient'
-import { redirect } from 'next/navigation'
+import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import NextDynamic from 'next/dynamic'
 
 const ProfileForm = NextDynamic(() => import('../../components/ProfileForm'), { ssr: false })
 const LoginBanner = NextDynamic(() => import('../../components/LoginBanner'), { ssr: false })
 
-export default async function ProfilePage() {
-  const { data } = await supabase.auth.getUser()
-  const user = data?.user
+export default function ProfilePage() {
+  const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const supabaseRef = useRef<any | null>(null)
+  const router = useRouter()
 
-  if (!user) redirect('/login')
+  useEffect(() => {
+    let mounted = true
+    async function init() {
+      const { supabase } = await import('../../lib/supabaseClient')
+      if (!mounted) return
+      supabaseRef.current = supabase
+      
+      // Get current user
+      const { data } = await supabaseRef.current.auth.getUser()
+      if (!mounted) return
+      
+      if (!data?.user) {
+        router.push('/login')
+        return
+      }
+      
+      setUser(data.user)
+      setLoading(false)
+    }
+    init()
+    return () => { mounted = false }
+  }, [router])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-600">Carregando...</p>
+      </div>
+    )
+  }
+
+  if (!user) return null
 
   return (
     <div className="space-y-6">

@@ -44,6 +44,14 @@ export default function LoginPage() {
       const { supabase } = await import('../../lib/supabaseClient')
       if (!mounted) return
       supabaseRef.current = supabase
+      // Check if user is already logged in
+      const { data: userData } = await supabaseRef.current.auth.getUser()
+      if (userData?.user) {
+        // redirect to profile if user is already logged in
+        try { router.push('/profile') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/profile' }
+        return
+      }
+
       // listen for changes and redirect on login
       const { data: sub } = supabaseRef.current.auth.onAuthStateChange((_event: any, session: any) => {
         console.debug('[auth] onAuthStateChange event', _event, { hasSession: !!session, userId: session?.user?.id })
