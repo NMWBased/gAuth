@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { cookies } from 'next/headers'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { supabase } from '../../lib/supabaseClient'
 import { redirect } from 'next/navigation'
 import NextDynamic from 'next/dynamic'
 
@@ -9,7 +9,6 @@ const ProfileForm = NextDynamic(() => import('../../components/ProfileForm'), { 
 const LoginBanner = NextDynamic(() => import('../../components/LoginBanner'), { ssr: false })
 
 export default async function ProfilePage() {
-  const supabase = createServerComponentClient({ cookies })
   const { data } = await supabase.auth.getUser()
   const user = data?.user
 

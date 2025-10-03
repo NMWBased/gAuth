@@ -11,9 +11,9 @@ export default function ProfileForm({ user }: { user: any }) {
   useEffect(() => {
     let mounted = true
     async function init() {
-      const mod = await import('@supabase/auth-helpers-nextjs')
+      const { supabase } = await import('../lib/supabaseClient')
       if (!mounted) return
-      supabaseRef.current = mod.createClientComponentClient()
+      supabaseRef.current = supabase
     }
     init()
     return () => { mounted = false }

@@ -41,9 +41,9 @@ export default function LoginPage() {
   useEffect(() => {
     let mounted = true
     async function init() {
-      const mod = await import('@supabase/auth-helpers-nextjs')
+      const { supabase } = await import('../../lib/supabaseClient')
       if (!mounted) return
-      supabaseRef.current = mod.createClientComponentClient()
+      supabaseRef.current = supabase
       // listen for changes and redirect on login
       const { data: sub } = supabaseRef.current.auth.onAuthStateChange((_event: any, session: any) => {
         console.debug('[auth] onAuthStateChange event', _event, { hasSession: !!session, userId: session?.user?.id })
