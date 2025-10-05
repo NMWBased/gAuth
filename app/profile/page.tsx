@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import NextDynamic from 'next/dynamic'
 
 const ProfileForm = NextDynamic(() => import('../../components/ProfileForm'), { ssr: false })
-const LoginBanner = NextDynamic(() => import('../../components/LoginBanner'), { ssr: false })
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null)
@@ -48,8 +47,6 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-container">
-      <LoginBanner />
-      
       <div className="profile-header">
         <h2 className="profile-title">Dashboard do Perfil</h2>
         <p className="profile-subtitle">Gerencie os seus dados pessoais</p>
