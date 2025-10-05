@@ -17,7 +17,7 @@ export default function LoginBanner() {
   function dismiss() {
     setVisible(false)
     // remove query param by pushing same pathname without params
-    try { router.push('/profile') } catch (_) { window.history.replaceState({}, '', '/profile') }
+    router.push('/profile')
   }
 
   return (

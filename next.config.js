@@ -9,6 +9,20 @@ const nextConfig = {
   async redirects() {
     return []
   },
+  // Ensure preview deployments don't redirect to production
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          }
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

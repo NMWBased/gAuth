@@ -40,7 +40,7 @@ export default function Header() {
     if (!supabaseRef.current) return
     await supabaseRef.current.auth.signOut()
     setUserEmail(null)
-    try { router.replace('/login') } catch (_) { window.location.href = '/login' }
+    router.replace('/login')
   }
 
   function initials(email?: string) {

@@ -15,18 +15,16 @@ export default function LoginPage() {
     setGoogleLoading(true)
     setMessage('')
     try {
-      const redirectTo = window.location.origin + '/welcome'
+      const { getCurrentDomain } = await import('../../lib/supabaseClient')
       const { data, error } = await supabaseRef.current.auth.signInWithOAuth({ 
         provider: 'google',
         options: {
-          redirectTo: redirectTo
+          redirectTo: `${getCurrentDomain()}/welcome`
         }
       })
       if (error) setMessage(error.message)
-      // fallback: se data.url existir, navega para lá
-      if (data?.url) {
-        window.location.href = data.url
-      }
+      // Não usar data.url para evitar redirect para produção
+      // O auth state change listener vai lidar com o redirect
     } catch (err: any) {
       setMessage(err?.message || 'Erro no login Google')
     } finally {
@@ -48,7 +46,7 @@ export default function LoginPage() {
       const { data: userData } = await supabaseRef.current.auth.getUser()
       if (userData?.user) {
         // redirect to welcome if user is already logged in
-        try { router.push('/welcome') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/welcome' }
+        router.push('/welcome')
         return
       }
 
@@ -57,7 +55,7 @@ export default function LoginPage() {
         console.debug('[auth] onAuthStateChange event', _event, { hasSession: !!session, userId: session?.user?.id })
         if (session?.user) {
           // redirect to welcome
-          try { router.push('/welcome') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/welcome' }
+          router.push('/welcome')
         }
       })
 
@@ -88,7 +86,8 @@ export default function LoginPage() {
     }
     setMessage('Enviando link...')
     try {
-  const redirectTo = window.location.origin + '/welcome'
+  const { getCurrentDomain } = await import('../../lib/supabaseClient')
+  const redirectTo = `${getCurrentDomain()}/welcome`
   // use emailRedirectTo option so supabase will append the correct redirect
   const { error } = await supabaseRef.current.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } })
       if (error) setMessage(error.message)
