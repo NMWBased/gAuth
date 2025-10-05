@@ -15,16 +15,13 @@ export default function LoginPage() {
     setGoogleLoading(true)
     setMessage('')
     try {
-      const { getCurrentDomain } = await import('../../lib/supabaseClient')
-      const { data, error } = await supabaseRef.current.auth.signInWithOAuth({ 
+      const { data, error } = await supabaseRef.current.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${getCurrentDomain()}/welcome`
+          redirectTo: window.location.origin + '/welcome'
         }
       })
       if (error) setMessage(error.message)
-      // Não usar data.url para evitar redirect para produção
-      // O auth state change listener vai lidar com o redirect
     } catch (err: any) {
       setMessage(err?.message || 'Erro no login Google')
     } finally {
@@ -86,10 +83,12 @@ export default function LoginPage() {
     }
     setMessage('Enviando link...')
     try {
-  const { getCurrentDomain } = await import('../../lib/supabaseClient')
-  const redirectTo = `${getCurrentDomain()}/welcome`
-  // use emailRedirectTo option so supabase will append the correct redirect
-  const { error } = await supabaseRef.current.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } })
+      const { error } = await supabaseRef.current.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: window.location.origin + '/welcome'
+        }
+      })
       if (error) setMessage(error.message)
       else setMessage('Verifique o seu e-mail para o link mágico.')
     } catch (err: any) {
