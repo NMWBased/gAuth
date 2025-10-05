@@ -9,3 +9,5 @@
 3. Defina a branch para deploy (por exemplo, `main`) e clique em Deploy.
 
 O Next irá construir o site no ambiente do Vercel e as variáveis públicas do Supabase estarão disponíveis em runtime.
+
+Teste de push
