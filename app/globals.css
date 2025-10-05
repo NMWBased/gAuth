@@ -133,6 +133,19 @@ body {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
 /* Corporate navbar link underline */
 .nav-link {
   position: relative;
@@ -301,6 +314,39 @@ body {
   font-weight: 600;
   margin-bottom: 1rem;
   color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.profile-item:last-child {
+  border-bottom: none;
+}
+
+.profile-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.profile-label {
+  font-weight: 600;
+  color: #374151;
+  min-width: 4rem;
+}
+
+.profile-value {
+  color: #111827;
+  flex: 1;
 }
 
 /* ========== FORMS ========== */
@@ -321,7 +367,9 @@ body {
 }
 
 .form-label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: #374151;
@@ -376,6 +424,9 @@ body {
 
 .font-semibold { font-weight: 600; }
 .font-bold { font-weight: 700; }
+
+.w-4 { width: 1rem; }
+.h-4 { height: 1rem; }
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {

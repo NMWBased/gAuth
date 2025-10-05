@@ -57,17 +57,52 @@ export default function ProfilePage() {
 
       <div className="profile-grid">
         <div className="profile-card">
-          <h3>Os seus dados</h3>
-          <div className="space-y-4">
-            <p><span className="font-semibold">Nome:</span> {user.user_metadata?.full_name || '—'}</p>
-            <p><span className="font-semibold">Email:</span> {user.email || '—'}</p>
-            <p><span className="font-semibold">Morada:</span> {user.user_metadata?.address || '—'}</p>
-            <p><span className="font-semibold">Telefone:</span> {user.user_metadata?.phone || '—'}</p>
+          <h3>
+            <svg className="profile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Os seus dados
+          </h3>
+          <div>
+            <div className="profile-item">
+              <svg className="profile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span className="profile-label">Nome:</span>
+              <span className="profile-value">{user.user_metadata?.full_name || '—'}</span>
+            </div>
+            <div className="profile-item">
+              <svg className="profile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span className="profile-label">Email:</span>
+              <span className="profile-value">{user.email || '—'}</span>
+            </div>
+            <div className="profile-item">
+              <svg className="profile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="profile-label">Morada:</span>
+              <span className="profile-value">{user.user_metadata?.address || '—'}</span>
+            </div>
+            <div className="profile-item">
+              <svg className="profile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span className="profile-label">Telefone:</span>
+              <span className="profile-value">{user.user_metadata?.phone || '—'}</span>
+            </div>
           </div>
         </div>
         
         <div className="profile-card">
-          <h3>Editar dados</h3>
+          <h3>
+            <svg className="profile-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            Editar dados
+          </h3>
           <ProfileForm user={user} />
         </div>
       </div>
