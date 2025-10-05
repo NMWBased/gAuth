@@ -52,7 +52,7 @@ export default function Header() {
   return (
     <header className="mb-4 flex items-center justify-between py-3">
       <div className="flex items-center gap-4">
-        <Link href="/" className="font-bold text-mono-950 text-lg">NMWB</Link>
+        <Link href="/welcome" className="font-bold text-mono-950 text-lg">NMWB</Link>
       </div>
       <nav className="flex items-center gap-4 text-sm">
         {userEmail ? (

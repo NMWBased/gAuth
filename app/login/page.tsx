@@ -47,8 +47,8 @@ export default function LoginPage() {
       // Check if user is already logged in
       const { data: userData } = await supabaseRef.current.auth.getUser()
       if (userData?.user) {
-        // redirect to profile if user is already logged in
-        try { router.push('/profile') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/profile' }
+        // redirect to welcome if user is already logged in
+        try { router.push('/welcome') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/welcome' }
         return
       }
 
@@ -56,8 +56,8 @@ export default function LoginPage() {
       const { data: sub } = supabaseRef.current.auth.onAuthStateChange((_event: any, session: any) => {
         console.debug('[auth] onAuthStateChange event', _event, { hasSession: !!session, userId: session?.user?.id })
         if (session?.user) {
-          // redirect to profile
-          try { router.push('/profile') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/profile' }
+          // redirect to welcome
+          try { router.push('/welcome') } catch (err) { console.debug('[auth] router.push failed, doing location.href fallback', err); window.location.href = '/welcome' }
         }
       })
 
