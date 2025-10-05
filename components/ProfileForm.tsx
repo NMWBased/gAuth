@@ -36,22 +36,36 @@ export default function ProfileForm({ user }: { user: any }) {
   }
 
   return (
-    <form onSubmit={save} className="space-y-4 max-w-xl">
+    <form onSubmit={save} className="space-y-4">
       <div>
-        <label className="block text-sm text-mono-600">Nome completo</label>
-        <input className="w-full mt-1 px-3 py-2 border rounded bg-white text-mono-900" value={form.full_name} onChange={(e) => setForm(s => ({ ...s, full_name: e.target.value }))} />
+        <label className="form-label">Nome completo</label>
+        <input 
+          className="form-input" 
+          value={form.full_name} 
+          onChange={(e) => setForm(s => ({ ...s, full_name: e.target.value }))} 
+        />
       </div>
       <div>
-        <label className="block text-sm text-mono-600">Morada</label>
-        <input className="w-full mt-1 px-3 py-2 border rounded bg-white text-mono-900" value={form.address} onChange={(e) => setForm(s => ({ ...s, address: e.target.value }))} />
+        <label className="form-label">Morada</label>
+        <input 
+          className="form-input" 
+          value={form.address} 
+          onChange={(e) => setForm(s => ({ ...s, address: e.target.value }))} 
+        />
       </div>
       <div>
-        <label className="block text-sm text-mono-600">Telefone</label>
-        <input className="w-full mt-1 px-3 py-2 border rounded bg-white text-mono-900" value={form.phone} onChange={(e) => setForm(s => ({ ...s, phone: e.target.value }))} />
+        <label className="form-label">Telefone</label>
+        <input 
+          className="form-input" 
+          value={form.phone} 
+          onChange={(e) => setForm(s => ({ ...s, phone: e.target.value }))} 
+        />
       </div>
       <div className="flex items-center gap-4">
-        <button className="primary-btn" type="submit" disabled={loading}>{loading ? 'A gravar...' : 'Guardar'}</button>
-        {message && <p className="text-sm text-mono-600">{message}</p>}
+        <button className="btn btn-primary" type="submit" disabled={loading}>
+          {loading ? 'A gravar...' : 'Guardar'}
+        </button>
+        {message && <p className="text-sm muted">{message}</p>}
       </div>
     </form>
   )

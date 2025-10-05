@@ -47,26 +47,27 @@ export default function ProfilePage() {
   if (!user) return null
 
   return (
-    <div className="space-y-6">
+    <div className="profile-container">
       <LoginBanner />
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold">Dashboard do Perfil</h2>
-          <p className="text-sm text-mono-600">Gerencie os seus dados pessoais</p>
-        </div>
-        {/* Avatar removido conforme solicitado */}
+      
+      <div className="profile-header">
+        <h2 className="profile-title">Dashboard do Perfil</h2>
+        <p className="profile-subtitle">Gerencie os seus dados pessoais</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-1 bg-white p-6 rounded shadow-subtle">
-          <h3 className="text-lg font-medium mb-3">Os seus dados</h3>
-          <p className="mb-2"><span className="font-semibold">Nome:</span> {user.user_metadata?.full_name || '—'}</p>
-          <p className="mb-2"><span className="font-semibold">Email:</span> {user.email || '—'}</p>
-          <p className="mb-2"><span className="font-semibold">Morada:</span> {user.user_metadata?.address || '—'}</p>
-          <p className="mb-2"><span className="font-semibold">Telefone:</span> {user.user_metadata?.phone || '—'}</p>
+      <div className="profile-grid">
+        <div className="profile-card">
+          <h3>Os seus dados</h3>
+          <div className="space-y-4">
+            <p><span className="font-semibold">Nome:</span> {user.user_metadata?.full_name || '—'}</p>
+            <p><span className="font-semibold">Email:</span> {user.email || '—'}</p>
+            <p><span className="font-semibold">Morada:</span> {user.user_metadata?.address || '—'}</p>
+            <p><span className="font-semibold">Telefone:</span> {user.user_metadata?.phone || '—'}</p>
+          </div>
         </div>
-        <div className="md:col-span-2 bg-white p-6 rounded shadow-subtle">
-          <h3 className="text-lg font-medium mb-3">Editar dados</h3>
+        
+        <div className="profile-card">
+          <h3>Editar dados</h3>
           <ProfileForm user={user} />
         </div>
       </div>

@@ -10,14 +10,24 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body className="text-slate-800">
-  <main className="min-h-screen container mx-auto p-3 flex flex-col min-h-0">
-          <Header />
-          <div className="flex-1 flex items-center justify-center min-h-0 pt-2">{children}</div>
-          <footer className="mt-8 border-t pt-4 text-center text-sm text-mono-600">
+      <body>
+        <div className="app-layout">
+          <header className="app-header">
+            <div className="container">
+              <Header />
+            </div>
+          </header>
+          
+          <main className="app-content">
+            <div className="content-wrapper">
+              {children}
+            </div>
+          </main>
+          
+          <footer className="app-footer">
             Built with Next.js • Supabase • Tailwind
           </footer>
-        </main>
+        </div>
       </body>
     </html>
   )
