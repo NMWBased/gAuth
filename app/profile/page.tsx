@@ -54,7 +54,7 @@ export default function ProfilePage() {
 
       <div className="profile-grid">
         <div className="profile-card">
-          <h3>
+          <h3 aria-label="Os seus dados pessoais">
             Os seus dados
           </h3>
           <div>
@@ -91,7 +91,7 @@ export default function ProfilePage() {
         </div>
         
         <div className="profile-card">
-          <h3>
+          <h3 aria-label="Editar dados pessoais">
             Editar dados
           </h3>
           <ProfileForm user={user} />
